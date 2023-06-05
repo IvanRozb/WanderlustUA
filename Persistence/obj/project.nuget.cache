@@ -1,14 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "8CZDtPTdeQPNikBqwdethtk+0davmYKfaXU3r07anU8A14o2gnevFqGaew+U0jz5i02g3flWTMU85zp7hLT37Q==",
+  "dgSpecHash": "lKqU0GWqR0hSg/vucfLYT5VAs58FIS86U2OJNcGXolFmjyEDyVilSCt/qZ9lz6NDavlAM5H1678gWzl9b9EzMw==",
   "success": true,
   "projectFilePath": "/home/huan_rozb/RiderProjects/WanderlustUA/Persistence/Persistence.csproj",
   "expectedPackageFiles": [
     "/home/huan_rozb/.nuget/packages/microsoft.entityframeworkcore/7.0.5/microsoft.entityframeworkcore.7.0.5.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.5/microsoft.entityframeworkcore.abstractions.7.0.5.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.5/microsoft.entityframeworkcore.analyzers.7.0.5.nupkg.sha512",
+    "/home/huan_rozb/.nuget/packages/microsoft.entityframeworkcore.relational/7.0.5/microsoft.entityframeworkcore.relational.7.0.5.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.extensions.caching.abstractions/7.0.0/microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.extensions.caching.memory/7.0.0/microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
+    "/home/huan_rozb/.nuget/packages/microsoft.extensions.configuration.abstractions/7.0.0/microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.extensions.dependencyinjection/7.0.0/microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/7.0.0/microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
