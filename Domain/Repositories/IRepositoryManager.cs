@@ -2,7 +2,7 @@
 {
     public interface IRepositoryManager
     {
-        IUserRepository OwnerRepository { get; }
+        IUserRepository UserRepository { get; }
 
         IUnitOfWork UnitOfWork { get; }
     }
