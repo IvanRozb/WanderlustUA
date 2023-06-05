@@ -10,7 +10,7 @@ public sealed class RepositoryDbContext : DbContext
     {
     }
 
-    public DbSet<User> Owners { get; set; }
+    public DbSet<User> Users { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) =>
