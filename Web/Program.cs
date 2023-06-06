@@ -1,20 +1,31 @@
 using Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Persistence;
 using Persistence.Repositories;
 using Services;
 using Services.Abstractions;
 using Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
+
+// Add services to the container.
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+
+builder.Services.AddScoped<IServiceManager, ServiceManager>();
+builder.Services.AddDbContextPool<RepositoryDbContext>(optionsBuilder =>
+{
+    var configuration = new ConfigurationBuilder()
+        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+        .AddJsonFile("appsettings.json")
+        .Build();
+    optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IServiceManager, ServiceManager>();
-builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 
