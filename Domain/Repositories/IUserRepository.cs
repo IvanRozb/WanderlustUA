@@ -8,4 +8,5 @@ public interface IUserRepository
     Task<User?> GetByIdAsync(Guid userId, CancellationToken cancellationToken = default);
     void Insert(User? user);
     void Remove(User? user);
+    public Task<bool> DoesUserWithEmailExist(string email);
 }
