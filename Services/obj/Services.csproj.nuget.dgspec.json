@@ -78,7 +78,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/huan_rozb/RiderProjects/WanderlustUA/Contracts/Contracts.csproj": {
+                "projectPath": "/home/huan_rozb/RiderProjects/WanderlustUA/Contracts/Contracts.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
