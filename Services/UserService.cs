@@ -34,6 +34,8 @@ internal sealed class UserService : IUserService
     public async Task<UserDto> CreateAsync(UserForCreationDto userForCreationDto, CancellationToken cancellationToken = default)
     {
         var user = userForCreationDto.Adapt<User>();
+        user.IsActive = true;
+        user.CreatedAt = DateTime.Now;
         _repositoryManager.UserRepository.Insert(user);
         await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
         return user.Adapt<UserDto>();
