@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "FPjrgwWL6Qo55cxx/5Ui9ccLUurq0IslmegXx7pLWueRytzEKYQw0bALess0IfYSMbS9Yhs/AJTix1ESUA4InA==",
+  "dgSpecHash": "UOmkfYoTtsBNE4vivETncw2fufNXQ0HImnvBdMOw1oz7yg19L9sKttCFhhpZV0uSdk+whBtXyJmZFGm8EPy2Xw==",
   "success": true,
   "projectFilePath": "/home/huan_rozb/RiderProjects/WanderlustUA/Persistence/Persistence.csproj",
   "expectedPackageFiles": [
     "/home/huan_rozb/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
+    "/home/huan_rozb/.nuget/packages/mapster/7.3.0/mapster.7.3.0.nupkg.sha512",
+    "/home/huan_rozb/.nuget/packages/mapster.core/1.2.0/mapster.core.1.2.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.data.sqlclient/5.0.1/microsoft.data.sqlclient.5.0.1.nupkg.sha512",
@@ -49,6 +51,8 @@
     "/home/huan_rozb/.nuget/packages/system.memory.data/1.0.2/system.memory.data.1.0.2.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/system.reflection/4.3.0/system.reflection.4.3.0.nupkg.sha512",
+    "/home/huan_rozb/.nuget/packages/system.reflection.emit/4.3.0/system.reflection.emit.4.3.0.nupkg.sha512",
+    "/home/huan_rozb/.nuget/packages/system.reflection.emit.ilgeneration/4.3.0/system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/system.reflection.primitives/4.3.0/system.reflection.primitives.4.3.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/system.resources.resourcemanager/4.3.0/system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/system.runtime/4.3.0/system.runtime.4.3.0.nupkg.sha512",
