@@ -1,9 +1,10 @@
 using System.Security.Cryptography;
 using System.Text;
 using Contracts;
+using Domain.Entities;
 using Domain.Repositories;
+using Mapster;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using Microsoft.Extensions.Configuration;
 
 namespace Persistence.Repositories;
 
@@ -12,7 +13,7 @@ internal sealed class AuthRepository : IAuthRepository
     private readonly RepositoryDbContext _dbContext;
     public AuthRepository(RepositoryDbContext dbContext) => _dbContext = dbContext;
 
-    public void Register(UserForRegistrationDto userForRegistration, string passwordKey)
+    public async void Register(UserForRegistrationDto userForRegistration, string passwordKey)
     {
         var passwordSalt = new byte[128 / 8];
         using var rng = RandomNumberGenerator.Create();
@@ -20,9 +21,20 @@ internal sealed class AuthRepository : IAuthRepository
         
         var passwordHash = GetPasswordHash(userForRegistration.Password,
             passwordSalt, passwordKey);
+
+        var authEntity = new Auth
+        {
+            Email = userForRegistration.Email,
+            PassHash = passwordHash,
+            PassSalt = passwordSalt
+        };
+        await _dbContext.Auth.AddAsync(authEntity);
+
+        var user = userForRegistration.Adapt<User>();
+        await _dbContext.Users.AddAsync(user);
     }
     
-    private static IEnumerable<byte> GetPasswordHash(string password, byte[] passwordSalt, string passwordKey)
+    private static byte[] GetPasswordHash(string password, byte[] passwordSalt, string passwordKey)
     {
         var passwordSaltPlusString = passwordKey + Convert.ToBase64String(passwordSalt);
 
