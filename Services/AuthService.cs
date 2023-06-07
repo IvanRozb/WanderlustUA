@@ -25,14 +25,15 @@ internal sealed class AuthService : IAuthService
         return authEntity;
     }
 
-    public async Task<Dictionary<string, string>> Login(UserForLoginDto userForLogin, string passwordKey)
+    public async Task<Dictionary<string, string>> Login(UserForLoginDto userForLogin, string passwordKey,
+        string tokenKey)
     {
         var userId = await _repositoryManager.AuthRepository.Login(userForLogin, passwordKey);
         
         await _repositoryManager.UnitOfWork.SaveChangesAsync();
 
         return new Dictionary<string, string> {
-            {"token", AuthHelper.CreateToken(userId)}
+            {"token", AuthHelper.CreateToken(userId, tokenKey)}
         };
     }
 }

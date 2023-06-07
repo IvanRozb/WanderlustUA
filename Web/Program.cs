@@ -1,5 +1,8 @@
+using System.Text;
 using Domain.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Persistence;
 using Persistence.Repositories;
 using Services;
@@ -26,6 +29,21 @@ builder.Services.AddDbContextPool<RepositoryDbContext>(optionsBuilder =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var tokenKeyString = builder.Configuration.GetSection("AppSettings:TokenKey").Value;
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                tokenKeyString ?? ""
+            )),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 
@@ -61,6 +79,8 @@ else
     app.UseCors("ProdCors");
     app.UseHttpsRedirection();
 }
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
