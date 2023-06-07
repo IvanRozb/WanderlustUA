@@ -4,7 +4,8 @@
     {
         IUserRepository UserRepository { get; }
         IAuthRepository AuthRepository { get; }
-
+        ITouristPlaceRepository TouristPlaceRepository { get; }
+        
         IUnitOfWork UnitOfWork { get; }
     }
 }

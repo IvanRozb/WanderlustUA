@@ -14,6 +14,7 @@ public sealed class RepositoryDbContext : DbContext
 
     public DbSet<User?> Users { get; set; }
     public DbSet<Auth?> Auth { get; set; }
+    public DbSet<TouristPlace?> TouristPlaces { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) =>
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(RepositoryDbContext).Assembly);

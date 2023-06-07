@@ -13,11 +13,11 @@ namespace Persistence.Repositories
         public async Task<IEnumerable<User?>> GetAllAsync(CancellationToken cancellationToken = default) =>
             await _dbContext.Users.ToListAsync(cancellationToken);
 
-        public async Task<User?> GetByIdAsync(Guid ownerId, CancellationToken cancellationToken = default) =>
-            await _dbContext.Users.FirstOrDefaultAsync(x => x != null && x.Id == ownerId, cancellationToken);
+        public async Task<User?> GetByIdAsync(Guid userId, CancellationToken cancellationToken = default) =>
+            await _dbContext.Users.FirstOrDefaultAsync(x => x != null && x.Id == userId, cancellationToken);
 
-        public void Insert(User? owner) => _dbContext.Users.Add(owner);
+        public void Insert(User? user) => _dbContext.Users.Add(user);
 
-        public void Remove(User? owner) => _dbContext.Users.Remove(owner);
+        public void Remove(User? user) => _dbContext.Users.Remove(user);
     }
 }
