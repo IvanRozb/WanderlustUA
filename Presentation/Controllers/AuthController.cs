@@ -1,10 +1,12 @@
 using Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Services.Abstractions;
 
 namespace Presentation.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/auth")]
 public class AuthController : ControllerBase
@@ -20,6 +22,7 @@ public class AuthController : ControllerBase
         _tokenKey = configuration.GetSection("AppSettings:TokenKey").Value;
     }
 
+    [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> Register(UserForRegistrationDto userForRegistration)
     {
@@ -28,9 +31,21 @@ public class AuthController : ControllerBase
         return CreatedAtAction("Register", new {email = authEntity.Email}, authEntity);
     }
     
+    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<IActionResult> Login(UserForLoginDto userForLogin)
     {
         return Ok(await _serviceManager.AuthService.Login(userForLogin, _passwordKey, _tokenKey));
+    }
+
+    [HttpGet("refreshToken")]
+    public string RefreshToken()
+    {
+        var userId = User.FindFirst("UserId")?.Value;
+        if (userId == null)
+        {
+            throw new Exception("Auth failed!");
+        }
+        return AuthHelper.CreateToken(new Guid(userId), _tokenKey);
     }
 }
