@@ -33,6 +33,8 @@ namespace Web.Middleware
             {
                 BadRequestException => StatusCodes.Status400BadRequest,
                 NotFoundException => StatusCodes.Status404NotFound,
+                IncorrectInputException => StatusCodes.Status401Unauthorized,
+                AuthException => StatusCodes.Status401Unauthorized,
                 _ => StatusCodes.Status500InternalServerError
             };
 

@@ -37,6 +37,20 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.30.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.30.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -78,7 +92,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/huan_rozb/RiderProjects/WanderlustUA/Contracts/Contracts.csproj": {
+                "projectPath": "/home/huan_rozb/RiderProjects/WanderlustUA/Contracts/Contracts.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
