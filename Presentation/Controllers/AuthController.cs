@@ -6,8 +6,8 @@ using Services.Abstractions;
 
 namespace Presentation.Controllers;
 
-[Authorize]
 [ApiController]
+[Authorize]
 [Route("api/auth")]
 public class AuthController : ControllerBase
 {
@@ -27,7 +27,6 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Register(UserForRegistrationDto userForRegistration)
     {
         var authEntity = await _serviceManager.AuthService.Register(userForRegistration, _passwordKey);
-        
         return CreatedAtAction("Register", new {email = authEntity.Email}, authEntity);
     }
     
@@ -41,11 +40,7 @@ public class AuthController : ControllerBase
     [HttpGet("refreshToken")]
     public string RefreshToken()
     {
-        var userId = User.FindFirst("UserId")?.Value;
-        if (userId == null)
-        {
-            throw new Exception("Auth failed!");
-        }
-        return AuthHelper.CreateToken(new Guid(userId), _tokenKey);
+        var userId = _serviceManager.AuthService.RefreshToken(User);
+        return AuthHelper.CreateToken(userId, _tokenKey);
     }
 }

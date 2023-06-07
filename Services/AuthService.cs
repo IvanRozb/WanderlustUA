@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Contracts;
 using Domain.Entities;
 using Domain.Exceptions;
@@ -35,5 +36,17 @@ internal sealed class AuthService : IAuthService
         return new Dictionary<string, string> {
             {"token", AuthHelper.CreateToken(userId, tokenKey)}
         };
+    }
+
+    public Guid RefreshToken(ClaimsPrincipal user)
+    {
+        var userId = user.FindFirst("UserId")?.Value;
+        
+        if (userId == null)
+        {
+            throw new AuthException();
+        }
+
+        return new Guid(userId);
     }
 }
