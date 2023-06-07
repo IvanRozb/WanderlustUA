@@ -1,8 +1,10 @@
 using Contracts;
+using Domain.Entities;
 
 namespace Domain.Repositories;
 
 public interface IAuthRepository
 {
-    public void Register(UserForRegistrationDto userForRegistration, string passwordKey);
+    public Task<Auth> Register(UserForRegistrationDto userForRegistration, string passwordKey);
+    public Task<Guid> Login(UserForLoginDto userForLogin, string passwordKey);
 }
