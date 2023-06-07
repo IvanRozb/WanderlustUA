@@ -10,26 +10,25 @@ namespace Presentation.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
-    private readonly IConfiguration _configuration;
+    private readonly string _passwordKey;
 
     public AuthController(IServiceManager serviceManager, IConfiguration configuration)
     {
         _serviceManager = serviceManager;
-        _configuration = configuration;
+        _passwordKey = configuration.GetSection("AppSettings:PasswordKey").Value;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(UserForRegistrationDto userForRegistration)
     {
-        _serviceManager.AuthService.Register(userForRegistration, _configuration
-            .GetSection("AppSettings:PasswordKey").Value);
+        var authEntity = await _serviceManager.AuthService.Register(userForRegistration, _passwordKey);
         
-        return Ok();
+        return CreatedAtAction("Register", new {email = authEntity.Email}, authEntity);
     }
     
     [HttpPost("login")]
     public async Task<IActionResult> Login(UserForLoginDto userForLogin)
     {
-        return Ok();
+        return Ok(await _serviceManager.AuthService.Login(userForLogin, _passwordKey));
     }
 }
