@@ -11,11 +11,13 @@ public class AuthController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
     private readonly string _passwordKey;
+    private readonly string _tokenKey;
 
     public AuthController(IServiceManager serviceManager, IConfiguration configuration)
     {
         _serviceManager = serviceManager;
         _passwordKey = configuration.GetSection("AppSettings:PasswordKey").Value;
+        _tokenKey = configuration.GetSection("AppSettings:TokenKey").Value;
     }
 
     [HttpPost("register")]
@@ -29,6 +31,6 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(UserForLoginDto userForLogin)
     {
-        return Ok(await _serviceManager.AuthService.Login(userForLogin, _passwordKey));
+        return Ok(await _serviceManager.AuthService.Login(userForLogin, _passwordKey, _tokenKey));
     }
 }
