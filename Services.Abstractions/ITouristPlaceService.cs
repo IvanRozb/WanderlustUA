@@ -5,6 +5,8 @@ namespace Services.Abstractions;
 public interface ITouristPlaceService
 {
     Task<IEnumerable<TouristPlaceDto>> GetAllAsync(CancellationToken cancellationToken = default);
+    
+    Task<IEnumerable<TouristPlaceDto?>> GetBySearchAsync(string searchParam, CancellationToken cancellationToken = default);
 
     Task<TouristPlaceDto> GetByIdAsync(Guid touristPlaceId, CancellationToken cancellationToken = default);
 

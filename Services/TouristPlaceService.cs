@@ -21,6 +21,15 @@ internal sealed class TouristPlaceService : ITouristPlaceService
         return touristPlacesDto;
     }
 
+    public async Task<IEnumerable<TouristPlaceDto?>> GetBySearchAsync(string searchParam, CancellationToken cancellationToken = default)
+    {
+        var touristPlaces = await _repositoryManager.TouristPlaceRepository.GetBySearchAsync(searchParam, cancellationToken);
+
+        var touristPlacesDto = touristPlaces.Adapt<IEnumerable<TouristPlaceDto>>();
+
+        return touristPlacesDto;
+    }
+
     public async Task<TouristPlaceDto> GetByIdAsync(Guid touristPlaceId, CancellationToken cancellationToken = default)
     {
         var touristPlace = await _repositoryManager.TouristPlaceRepository.GetByIdAsync(touristPlaceId, cancellationToken);

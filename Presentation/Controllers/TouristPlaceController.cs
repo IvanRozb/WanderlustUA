@@ -19,6 +19,14 @@ public class TouristPlaceController : ControllerBase
 
         return Ok(touristPlaces);
     }
+    
+    [HttpGet("{searchParam}")]
+    public async Task<IActionResult> GetTouristPlacesBySearch(string searchParam, CancellationToken cancellationToken)
+    {
+        var touristPlaces = await _serviceManager.TouristPlaceService.GetBySearchAsync(searchParam, cancellationToken);
+
+        return Ok(touristPlaces);
+    }
 
     [HttpGet("{touristPlaceId:guid}")]
     public async Task<IActionResult> GetTouristPlaceById(Guid touristPlaceId, CancellationToken cancellationToken)
