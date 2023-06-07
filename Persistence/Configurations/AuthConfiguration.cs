@@ -9,9 +9,9 @@ internal sealed class AuthConfiguration : IEntityTypeConfiguration<Auth>
     public void Configure(EntityTypeBuilder<Auth> builder)
     {
         builder.ToTable(nameof(Auth));
+        builder.HasKey(auth => auth.Email);
 
         builder.Property(user => user.Email).HasMaxLength(320);
-        builder.Property(user => user.Email).IsRequired();
         
         builder.Property(auth => auth.PassHash).IsRequired();
         
