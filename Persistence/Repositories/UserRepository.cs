@@ -19,8 +19,5 @@ namespace Persistence.Repositories
         public void Insert(User? owner) => _dbContext.Users.Add(owner);
 
         public void Remove(User? owner) => _dbContext.Users.Remove(owner);
-
-        public async Task<bool> DoesUserWithEmailExist(string email) =>
-            await _dbContext.Users.AnyAsync(user => user != null && user.Email == email);
     }
 }
