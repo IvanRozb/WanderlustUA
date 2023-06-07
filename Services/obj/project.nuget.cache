@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "rD7B6tERTtWFifcTm2EQyOVHPkAiImmv0zNoJsfPOTm7caNQI1EAY5IRVyG2ROo/f7AeZMh6GVbRZoM1YkfAyA==",
+  "dgSpecHash": "iRBD7SrjDuVrfrFVBtme5iaj/wiCgg/lCqtHLNtLhrLbQ3VTJX6w5Zv5AZk45uKWlJgQrbp+bbMcQZS5awF2YA==",
   "success": true,
   "projectFilePath": "/home/huan_rozb/RiderProjects/WanderlustUA/Services/Services.csproj",
   "expectedPackageFiles": [
     "/home/huan_rozb/.nuget/packages/mapster/7.3.0/mapster.7.3.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/mapster.core/1.2.0/mapster.core.1.2.0.nupkg.sha512",
+    "/home/huan_rozb/.nuget/packages/microsoft.aspnetcore.cryptography.internal/7.0.5/microsoft.aspnetcore.cryptography.internal.7.0.5.nupkg.sha512",
+    "/home/huan_rozb/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/7.0.5/microsoft.aspnetcore.cryptography.keyderivation.7.0.5.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.csharp/4.3.0/microsoft.csharp.4.3.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/home/huan_rozb/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
