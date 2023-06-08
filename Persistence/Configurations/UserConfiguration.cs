@@ -28,5 +28,8 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .WithOne()
             .HasForeignKey(route => route.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(user => user.Role)
+            .WithOne();
     }
 }

@@ -11,4 +11,5 @@ public class User
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public ICollection<Route> Routes { get; set; }
+    public UserRole Role { get; set; }
 }
