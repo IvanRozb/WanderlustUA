@@ -6,4 +6,5 @@ public interface IServiceManager
     IAuthService AuthService { get; }
     IRouteService RouteService { get; }
     ITouristPlaceService TouristPlaceService { get; }
+    IRouteTouristPlaceService RouteTouristPlaceService { get; }
 }
