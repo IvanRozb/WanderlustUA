@@ -43,7 +43,7 @@ public class AuthController : ControllerBase
     [HttpGet("refreshToken")]
     public string RefreshToken()
     {
-        var userId = _serviceManager.AuthService.RefreshToken(User.FindFirst("UserId")?.Value, _adminKey);
+        var userId = new Guid(User.FindFirst("UserId")?.Value);
         return AuthHelper.CreateToken(userId, _tokenKey, _adminKey);
     }
 }

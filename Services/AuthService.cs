@@ -37,9 +37,4 @@ internal sealed class AuthService : IAuthService
             {"token", AuthHelper.CreateToken(userId, tokenKey, adminKey)}
         };
     }
-
-    public Guid RefreshToken(string userId, string? adminKey)
-    {
-        return new Guid(userId);
-    }
 }
