@@ -8,6 +8,7 @@ namespace Services
         private readonly Lazy<IUserService> _lazyUserService;
         private readonly Lazy<IAuthService> _lazyAuthService;
         private readonly Lazy<ITouristPlaceService> _lazyTouristPlaceService;
+        private readonly Lazy<IRouteService> _lazyRouteService;
 
         public ServiceManager(IRepositoryManager repositoryManager)
         {
@@ -17,10 +18,13 @@ namespace Services
                 new AuthService(repositoryManager));
             _lazyTouristPlaceService = new Lazy<ITouristPlaceService>(() => 
                 new TouristPlaceService(repositoryManager));
+            _lazyRouteService = new Lazy<IRouteService>(() => 
+                new RouteService(repositoryManager));
         }
 
         public IUserService UserService => _lazyUserService.Value;
         public IAuthService AuthService => _lazyAuthService.Value;
         public ITouristPlaceService TouristPlaceService => _lazyTouristPlaceService.Value;
+        public IRouteService RouteService => _lazyRouteService.Value;
     }
 }
