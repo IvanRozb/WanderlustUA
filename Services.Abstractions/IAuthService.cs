@@ -7,7 +7,7 @@ namespace Services.Abstractions;
 public interface IAuthService
 {
     public Task<Auth> Register(UserForRegistrationDto userForRegistration, string passwordKey);
-    public Task<Dictionary<string, string>> Login(UserForLoginDto userForLogin, string passwordKey, string tokenKey);
+    public Task<Dictionary<string, string>> Login(UserForLoginDto userForLogin, string passwordKey, string tokenKey, string adminKey);
 
-    public Guid RefreshToken(ClaimsPrincipal user);
+    public Guid RefreshToken(string userId);
 }

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,14 @@ public class AuthController : ControllerBase
     private readonly IServiceManager _serviceManager;
     private readonly string _passwordKey;
     private readonly string _tokenKey;
+    private readonly string _adminKey;
 
     public AuthController(IServiceManager serviceManager, IConfiguration configuration)
     {
         _serviceManager = serviceManager;
         _passwordKey = configuration.GetSection("AppSettings:PasswordKey").Value;
         _tokenKey = configuration.GetSection("AppSettings:TokenKey").Value;
+        _adminKey = configuration.GetSection("AppSettings:AdminKey").Value;
     }
 
     [AllowAnonymous]
@@ -34,13 +37,13 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(UserForLoginDto userForLogin)
     {
-        return Ok(await _serviceManager.AuthService.Login(userForLogin, _passwordKey, _tokenKey));
+        return Ok(await _serviceManager.AuthService.Login(userForLogin, _passwordKey, _tokenKey, _adminKey));
     }
 
     [HttpGet("refreshToken")]
     public string RefreshToken()
     {
-        var userId = _serviceManager.AuthService.RefreshToken(User);
-        return AuthHelper.CreateToken(userId, _tokenKey);
+        var userId = _serviceManager.AuthService.RefreshToken(User.FindFirst("UserId")?.Value, _adminKey);
+        return AuthHelper.CreateToken(userId, _tokenKey, _adminKey);
     }
 }

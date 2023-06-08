@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Services.Abstractions;
 namespace Presentation.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/tourist-place")]
 public class TouristPlaceController : ControllerBase
 {
@@ -14,6 +16,7 @@ public class TouristPlaceController : ControllerBase
     public TouristPlaceController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetTouristPlaces(CancellationToken cancellationToken)
     {
         var touristPlaces = await _serviceManager.TouristPlaceService.GetAllAsync(cancellationToken);
@@ -22,6 +25,7 @@ public class TouristPlaceController : ControllerBase
     }
     
     [HttpGet("{searchParam}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetTouristPlacesBySearch(string searchParam, CancellationToken cancellationToken)
     {
         var touristPlaces = await _serviceManager.TouristPlaceService.GetBySearchAsync(searchParam, cancellationToken);
@@ -30,6 +34,7 @@ public class TouristPlaceController : ControllerBase
     }
 
     [HttpGet("{touristPlaceId:guid}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetTouristPlaceById(Guid touristPlaceId, CancellationToken cancellationToken)
     {
         var touristPlaceDto = await _serviceManager.TouristPlaceService.GetByIdAsync(touristPlaceId, cancellationToken);
@@ -38,7 +43,6 @@ public class TouristPlaceController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize]
     public async Task<IActionResult> CreateTouristPlace([FromBody] TouristPlaceForCreationDto touristPlaceForCreationDto)
     {
         var touristPlaceDto = await _serviceManager.TouristPlaceService.CreateAsync(touristPlaceForCreationDto);
@@ -47,7 +51,6 @@ public class TouristPlaceController : ControllerBase
     }
 
     [HttpPut("{touristPlaceId:guid}")]
-    [Authorize]
     public async Task<IActionResult> UpdateTouristPlace(Guid touristPlaceId, [FromBody] TouristPlaceForUpdateDto touristPlaceForUpdateDto, CancellationToken cancellationToken)
     {
         await _serviceManager.TouristPlaceService.UpdateAsync(touristPlaceId, touristPlaceForUpdateDto, cancellationToken);
@@ -56,9 +59,12 @@ public class TouristPlaceController : ControllerBase
     }
 
     [HttpDelete("{touristPlaceId:guid}")]
-    [Authorize]
     public async Task<IActionResult> DeleteTouristPlace(Guid touristPlaceId, CancellationToken cancellationToken)
     {
+        var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+        if (userRole != "Admin" && userRole != "Manager")
+            throw new Exception("Forbidden!");
+        
         await _serviceManager.TouristPlaceService.DeleteAsync(touristPlaceId, cancellationToken);
 
         return NoContent();

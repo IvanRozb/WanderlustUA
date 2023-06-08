@@ -20,10 +20,11 @@ public static class AuthHelper
         );
     }
     
-    public static string CreateToken(Guid userId, string tokenKeyString)
+    public static string CreateToken(Guid userId, string tokenKeyString, string? adminKey = null)
     {
         var claims = new Claim[] {
-            new("userId", userId.ToString())
+            new("userId", userId.ToString()),
+            new(ClaimTypes.Role, adminKey == userId.ToString() ? "Admin" : "User")
         };
 
         var tokenKey = new SymmetricSecurityKey(
