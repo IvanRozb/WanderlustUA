@@ -9,5 +9,5 @@ public class RouteDto
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     
-    public IEnumerable<RouteTouristPlaceDto> RouteTouristPlaces { get; set; }
+    public IEnumerable<JointDto> Joints { get; set; }
 }

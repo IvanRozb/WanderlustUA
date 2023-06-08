@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class RouteTouristPlace
+public class Joint
 {
     public Guid Id { get; set; }
     public Guid RouteId { get; set; }

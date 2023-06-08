@@ -2,13 +2,13 @@ using Domain.Entities;
 
 namespace Domain.Repositories;
 
-public interface IRouteTouristPlaceRepository
+public interface IJointRepository
 {
-    Task<IEnumerable<RouteTouristPlace>> GetAllByRouteIdAsync(Guid routeId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Joint>> GetAllByRouteIdAsync(Guid routeId, CancellationToken cancellationToken = default);
 
-    Task<RouteTouristPlace> GetByIdAsync(Guid routeTouristPlaceId, CancellationToken cancellationToken = default);
+    Task<Joint> GetByIdAsync(Guid jointId, CancellationToken cancellationToken = default);
 
-    void Insert(RouteTouristPlace routeTouristPlace);
+    void Insert(Joint joint);
 
-    void Remove(RouteTouristPlace routeTouristPlace);
+    void Remove(Joint joint);
 }

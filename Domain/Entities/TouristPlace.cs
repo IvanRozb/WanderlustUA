@@ -8,5 +8,5 @@ public class TouristPlace
     public string Region { get; set; } = "";
     public string Description { get; set; } = "";
     
-    public ICollection<RouteTouristPlace> RouteTouristPlaces { get; set; }
+    public ICollection<Joint> Joints { get; set; }
 }

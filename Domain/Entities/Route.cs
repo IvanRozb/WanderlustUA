@@ -9,5 +9,5 @@ public class Route
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     
-    public ICollection<RouteTouristPlace> RouteTouristPlaces { get; set; }
+    public ICollection<Joint> Joints { get; set; }
 }

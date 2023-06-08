@@ -1,9 +1,9 @@
 namespace Domain.Exceptions;
 
-public sealed class RouteTouristPlaceNotFoundException : NotFoundException
+public sealed class JointNotFoundException : NotFoundException
 {
-    public RouteTouristPlaceNotFoundException(Guid routeTouristPlaceId)
-        : base($"The route-tourist-place with the identifier {routeTouristPlaceId} was not found.")
+    public JointNotFoundException(Guid jointId)
+        : base($"The joint with the identifier {jointId} was not found.")
     {
     }
 }

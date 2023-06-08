@@ -6,7 +6,7 @@
         IAuthRepository AuthRepository { get; }
         ITouristPlaceRepository TouristPlaceRepository { get; }
         IRouteRepository RouteRepository { get; }
-        IRouteTouristPlaceRepository RouteTouristPlaceRepository { get; }
+        IJointRepository JointRepository { get; }
         
         IUnitOfWork UnitOfWork { get; }
     }

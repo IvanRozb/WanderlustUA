@@ -7,12 +7,12 @@ using Services.Abstractions;
 
 namespace Services;
 
-public class RouteTouristPlaceService : IRouteTouristPlaceService
+public class JointService : IJointService
 {
     private readonly IRepositoryManager _repositoryManager;
-    public RouteTouristPlaceService(IRepositoryManager repositoryManager) => _repositoryManager = repositoryManager;
+    public JointService(IRepositoryManager repositoryManager) => _repositoryManager = repositoryManager;
 
-    public async Task<IEnumerable<RouteTouristPlaceDto>> GetAllByUserRouteIdAsync(Guid userId, Guid routeId, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<JointDto>> GetAllByUserRouteIdAsync(Guid userId, Guid routeId, CancellationToken cancellationToken = default)
     {
         var user = await _repositoryManager.UserRepository.GetByIdAsync(userId, cancellationToken);
         if (user is null)
@@ -29,12 +29,12 @@ public class RouteTouristPlaceService : IRouteTouristPlaceService
             throw new RouteDoesNotBelongToUserException(userId, routeId);
         }
 
-        var routeTouristPlaces = await _repositoryManager.RouteTouristPlaceRepository.GetAllByRouteIdAsync(routeId, cancellationToken);
-        var routeTouristPlacesDto = routeTouristPlaces.Adapt<IEnumerable<RouteTouristPlaceDto>>();
-        return routeTouristPlacesDto;
+        var joints = await _repositoryManager.JointRepository.GetAllByRouteIdAsync(routeId, cancellationToken);
+        var jointsDto = joints.Adapt<IEnumerable<JointDto>>();
+        return jointsDto;
     }
 
-    public async Task<RouteTouristPlaceDto> GetByIdAsync(Guid userId, Guid routeId, Guid routeTouristPlaceId, CancellationToken cancellationToken)
+    public async Task<JointDto> GetByIdAsync(Guid userId, Guid routeId, Guid jointId, CancellationToken cancellationToken)
     {
         var user = await _repositoryManager.UserRepository.GetByIdAsync(userId, cancellationToken);
         if (user is null)
@@ -51,21 +51,21 @@ public class RouteTouristPlaceService : IRouteTouristPlaceService
             throw new RouteDoesNotBelongToUserException(userId, routeId);
         }
 
-        var routeTouristPlace = await _repositoryManager.RouteTouristPlaceRepository.GetByIdAsync(routeTouristPlaceId, cancellationToken);
-        if (routeTouristPlace is null)
+        var joint = await _repositoryManager.JointRepository.GetByIdAsync(jointId, cancellationToken);
+        if (joint is null)
         {
-            throw new RouteTouristPlaceNotFoundException(routeTouristPlaceId);
+            throw new JointNotFoundException(jointId);
         }
-        if (routeTouristPlace.RouteId != routeId)
+        if (joint.RouteId != routeId)
         {
-            throw new RouteTouristPlaceDoesNotBelongToRouteException(routeTouristPlaceId, routeId);
+            throw new JointDoesNotBelongToRouteException(jointId, routeId);
         }
         
-        var routeTouristPlaceDto = routeTouristPlace.Adapt<RouteTouristPlaceDto>();
-        return routeTouristPlaceDto;
+        var jointDto = joint.Adapt<JointDto>();
+        return jointDto;
     }
 
-    public async Task<RouteTouristPlaceDto> CreateAsync(Guid userId, Guid routeId, Guid touristPlaceId, RouteTouristPlaceForCreationDto routeTouristPlaceForCreationDto,
+    public async Task<JointDto> CreateAsync(Guid userId, Guid routeId, Guid touristPlaceId, JointForCreationDto jointForCreationDto,
         CancellationToken cancellationToken = default)
     {
         var user = await _repositoryManager.UserRepository.GetByIdAsync(userId, cancellationToken);
@@ -89,15 +89,15 @@ public class RouteTouristPlaceService : IRouteTouristPlaceService
             throw new TouristPlaceNotFoundException(touristPlaceId);
         }
         
-        var routeTouristPlaceDto = routeTouristPlaceForCreationDto.Adapt<RouteTouristPlace>();
-        routeTouristPlaceDto.RouteId = routeId;
-        routeTouristPlaceDto.TouristPlaceId = touristPlaceId;
-        _repositoryManager.RouteTouristPlaceRepository.Insert(routeTouristPlaceDto);
+        var jointDto = jointForCreationDto.Adapt<Joint>();
+        jointDto.RouteId = routeId;
+        jointDto.TouristPlaceId = touristPlaceId;
+        _repositoryManager.JointRepository.Insert(jointDto);
         await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
-        return routeTouristPlaceDto.Adapt<RouteTouristPlaceDto>();
+        return jointDto.Adapt<JointDto>();
     }
 
-    public async Task DeleteAsync(Guid userId, Guid routeId, Guid routeTouristPlaceId, CancellationToken cancellationToken = default)
+    public async Task DeleteAsync(Guid userId, Guid routeId, Guid jointId, CancellationToken cancellationToken = default)
     {
         var user = await _repositoryManager.UserRepository.GetByIdAsync(userId, cancellationToken);
         if (user is null)
@@ -114,13 +114,13 @@ public class RouteTouristPlaceService : IRouteTouristPlaceService
             throw new RouteDoesNotBelongToUserException(userId, routeId);
         }
 
-        var routeTouristPlace =
-            await _repositoryManager.RouteTouristPlaceRepository.GetByIdAsync(routeTouristPlaceId, cancellationToken);
-        if (routeTouristPlace is null)
+        var joint =
+            await _repositoryManager.JointRepository.GetByIdAsync(jointId, cancellationToken);
+        if (joint is null)
         {
-            throw new RouteTouristPlaceNotFoundException(routeTouristPlaceId);
+            throw new JointNotFoundException(jointId);
         }
-        _repositoryManager.RouteTouristPlaceRepository.Remove(routeTouristPlace);
+        _repositoryManager.JointRepository.Remove(joint);
         await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
     }
 }

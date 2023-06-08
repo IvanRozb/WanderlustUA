@@ -9,7 +9,7 @@ namespace Services
         private readonly Lazy<IAuthService> _lazyAuthService;
         private readonly Lazy<ITouristPlaceService> _lazyTouristPlaceService;
         private readonly Lazy<IRouteService> _lazyRouteService;
-        private readonly Lazy<IRouteTouristPlaceService> _lazyRouteTouristPlaceService;
+        private readonly Lazy<IJointService> _lazyJointService;
 
         public ServiceManager(IRepositoryManager repositoryManager)
         {
@@ -21,14 +21,14 @@ namespace Services
                 new TouristPlaceService(repositoryManager));
             _lazyRouteService = new Lazy<IRouteService>(() => 
                 new RouteService(repositoryManager));
-            _lazyRouteTouristPlaceService = new Lazy<IRouteTouristPlaceService>(() => 
-                new RouteTouristPlaceService(repositoryManager));
+            _lazyJointService = new Lazy<IJointService>(() => 
+                new JointService(repositoryManager));
         }
 
         public IUserService UserService => _lazyUserService.Value;
         public IAuthService AuthService => _lazyAuthService.Value;
         public ITouristPlaceService TouristPlaceService => _lazyTouristPlaceService.Value;
         public IRouteService RouteService => _lazyRouteService.Value;
-        public IRouteTouristPlaceService RouteTouristPlaceService => _lazyRouteTouristPlaceService.Value;
+        public IJointService JointService => _lazyJointService.Value;
     }
 }

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Configurations;
 
-internal sealed class RouteTouristPlaceConfiguration : IEntityTypeConfiguration<RouteTouristPlace>
+internal sealed class JointConfiguration : IEntityTypeConfiguration<Joint>
 {
-    public void Configure(EntityTypeBuilder<RouteTouristPlace> builder)
+    public void Configure(EntityTypeBuilder<Joint> builder)
     {
-        builder.ToTable(nameof(RouteTouristPlace));
+        builder.ToTable(nameof(Joint));
 
         builder.HasKey(rtp => rtp.Id);
 

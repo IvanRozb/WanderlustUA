@@ -21,7 +21,7 @@ internal sealed class TouristPlaceConfiguration : IEntityTypeConfiguration<Touri
         builder.Property(touristPlace => touristPlace.Region).HasMaxLength(100);
         builder.Property(touristPlace => touristPlace.Region).IsRequired();
         
-        builder.HasMany(rtp => rtp.RouteTouristPlaces)
+        builder.HasMany(rtp => rtp.Joints)
             .WithOne()
             .HasForeignKey(rtp => rtp.RouteId);
     }

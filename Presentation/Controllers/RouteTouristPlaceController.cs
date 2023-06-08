@@ -5,46 +5,46 @@ using Services.Abstractions;
 namespace Presentation.Controllers;
 
 [ApiController]
-[Route("api/users/{userId:guid}/routes/{routeId:guid}/route-tourist-places")]
-public class RouteTouristPlaceController : ControllerBase
+[Route("api/users/{userId:guid}/routes/{routeId:guid}/joints")]
+public class JointController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
 
-    public RouteTouristPlaceController(IServiceManager serviceManager) => _serviceManager = serviceManager;
+    public JointController(IServiceManager serviceManager) => _serviceManager = serviceManager;
     
     [HttpGet]
-    public async Task<IActionResult> GetRouteTouristPlaces(Guid userId, Guid routeId, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetJoints(Guid userId, Guid routeId, CancellationToken cancellationToken)
     {
-        var routeTouristPlacesDto = await _serviceManager.RouteTouristPlaceService
+        var jointsDto = await _serviceManager.JointService
             .GetAllByUserRouteIdAsync(userId, routeId, cancellationToken);
 
-        return Ok(routeTouristPlacesDto);
+        return Ok(jointsDto);
     }
 
-    [HttpGet("{routeTouristPlaceId:guid}")]
-    public async Task<IActionResult> GetRouteTouristPlaceById(Guid userId, Guid routeId, Guid touristPlaceId, Guid routeTouristPlaceId,  CancellationToken cancellationToken)
+    [HttpGet("{jointId:guid}")]
+    public async Task<IActionResult> GetJointById(Guid userId, Guid routeId, Guid touristPlaceId, Guid jointId,  CancellationToken cancellationToken)
     { 
-        var routeTouristPlaceDto = await _serviceManager.RouteTouristPlaceService
-            .GetByIdAsync(userId, routeId, routeTouristPlaceId, cancellationToken);
+        var jointDto = await _serviceManager.JointService
+            .GetByIdAsync(userId, routeId, jointId, cancellationToken);
 
-        return Ok(routeTouristPlaceDto);
+        return Ok(jointDto);
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateRouteTouristPlace(Guid userId, Guid routeId, Guid touristPlaceId, 
-        [FromBody] RouteTouristPlaceForCreationDto routeForCreationDto, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> CreateJoint(Guid userId, Guid routeId, Guid touristPlaceId, 
+        [FromBody] JointForCreationDto routeForCreationDto, CancellationToken cancellationToken = default)
     {
-        var response = await _serviceManager.RouteTouristPlaceService
+        var response = await _serviceManager.JointService
             .CreateAsync(userId, routeId, touristPlaceId, routeForCreationDto, cancellationToken);
 
         return Ok(response);
     }
 
-    [HttpDelete("{routeTouristPlaceId:guid}")]
-    public async Task<IActionResult> DeleteRouteTouristPlace(Guid userId, Guid routeId, Guid routeTouristPlaceId, CancellationToken cancellationToken)
+    [HttpDelete("{jointId:guid}")]
+    public async Task<IActionResult> DeleteJoint(Guid userId, Guid routeId, Guid jointId, CancellationToken cancellationToken)
     {
-        await _serviceManager.RouteTouristPlaceService
-            .DeleteAsync(userId, routeId, routeTouristPlaceId, cancellationToken);
+        await _serviceManager.JointService
+            .DeleteAsync(userId, routeId, jointId, cancellationToken);
 
         return NoContent();
     }

@@ -1,6 +1,6 @@
 namespace Contracts;
 
-public class RouteTouristPlaceDto
+public class JointDto
 {
     public Guid Id { get; set; }
     public Guid RouteId { get; set; }

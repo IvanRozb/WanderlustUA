@@ -2,11 +2,11 @@ using Contracts;
 
 namespace Services.Abstractions;
 
-public interface IRouteTouristPlaceService
+public interface IJointService
 {
-    Task<IEnumerable<RouteTouristPlaceDto>> GetAllByUserRouteIdAsync(Guid userId, Guid routeId, CancellationToken cancellationToken = default);
-    Task<RouteTouristPlaceDto> GetByIdAsync(Guid userId, Guid routeId, Guid routeTouristPlaceId, CancellationToken cancellationToken = default);
-    Task<RouteTouristPlaceDto> CreateAsync(Guid userId, Guid routeId, Guid touristPlaceId,
-        RouteTouristPlaceForCreationDto routeForCreationDto, CancellationToken cancellationToken = default);
-    Task DeleteAsync(Guid userId, Guid routeId, Guid routeTouristPlaceId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<JointDto>> GetAllByUserRouteIdAsync(Guid userId, Guid routeId, CancellationToken cancellationToken = default);
+    Task<JointDto> GetByIdAsync(Guid userId, Guid routeId, Guid jointId, CancellationToken cancellationToken = default);
+    Task<JointDto> CreateAsync(Guid userId, Guid routeId, Guid touristPlaceId,
+        JointForCreationDto routeForCreationDto, CancellationToken cancellationToken = default);
+    Task DeleteAsync(Guid userId, Guid routeId, Guid jointId, CancellationToken cancellationToken = default);
 }

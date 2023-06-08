@@ -17,7 +17,7 @@ internal sealed class RouteConfiguration : IEntityTypeConfiguration<Route>
         builder.Property(route => route.StartDate).IsRequired();
         builder.Property(route => route.EndDate).IsRequired();
 
-        builder.HasMany(rtp => rtp.RouteTouristPlaces)
+        builder.HasMany(rtp => rtp.Joints)
             .WithOne()
             .HasForeignKey(rtp => rtp.RouteId);
     }
