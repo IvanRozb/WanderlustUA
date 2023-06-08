@@ -1,4 +1,5 @@
 using Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstractions;
 
@@ -37,6 +38,7 @@ public class TouristPlaceController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateTouristPlace([FromBody] TouristPlaceForCreationDto touristPlaceForCreationDto)
     {
         var touristPlaceDto = await _serviceManager.TouristPlaceService.CreateAsync(touristPlaceForCreationDto);
@@ -45,6 +47,7 @@ public class TouristPlaceController : ControllerBase
     }
 
     [HttpPut("{touristPlaceId:guid}")]
+    [Authorize]
     public async Task<IActionResult> UpdateTouristPlace(Guid touristPlaceId, [FromBody] TouristPlaceForUpdateDto touristPlaceForUpdateDto, CancellationToken cancellationToken)
     {
         await _serviceManager.TouristPlaceService.UpdateAsync(touristPlaceId, touristPlaceForUpdateDto, cancellationToken);
@@ -53,6 +56,7 @@ public class TouristPlaceController : ControllerBase
     }
 
     [HttpDelete("{touristPlaceId:guid}")]
+    [Authorize]
     public async Task<IActionResult> DeleteTouristPlace(Guid touristPlaceId, CancellationToken cancellationToken)
     {
         await _serviceManager.TouristPlaceService.DeleteAsync(touristPlaceId, cancellationToken);
