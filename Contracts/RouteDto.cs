@@ -8,4 +8,6 @@ public class RouteDto
     public string Description { get; set; } = "";
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
+    
+    public IEnumerable<JointDto> Joints { get; set; }
 }
