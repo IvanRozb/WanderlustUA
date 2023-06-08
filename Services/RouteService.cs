@@ -43,6 +43,12 @@ internal sealed class RouteService : IRouteService
         {
             throw new UserNotFoundException(userId);
         }
+
+        if (routeForCreationDto.StartDate.CompareTo(routeForCreationDto.EndDate) >= 0)
+        {
+            throw new Exception("StartDate must be less than EndDate.");
+        }
+        
         var route = routeForCreationDto.Adapt<Route>();
         route.UserId = user.Id;
         _repositoryManager.RouteRepository.Insert(route);
