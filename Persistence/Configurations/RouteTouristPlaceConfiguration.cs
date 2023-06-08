@@ -17,13 +17,5 @@ internal sealed class RouteTouristPlaceConfiguration : IEntityTypeConfiguration<
         builder.Property(rtp => rtp.Sequence).IsRequired();
 
         builder.Property(rtp => rtp.VisitDate).IsRequired();
-        
-        builder.HasOne(rtp => rtp.Routes)
-            .WithMany()
-            .HasForeignKey(rtp => rtp.RouteId);
-
-        builder.HasOne(rtp => rtp.TouristPlaces)
-            .WithMany()
-            .HasForeignKey(rtp => rtp.TouristPlaceId);
     }
 }
