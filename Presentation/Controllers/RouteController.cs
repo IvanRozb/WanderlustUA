@@ -1,10 +1,12 @@
 using Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstractions;
 
 namespace Presentation.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/users/{userId:guid}/routes")]
 public class RoutesController : ControllerBase
 {
@@ -13,13 +15,15 @@ public class RoutesController : ControllerBase
     public RoutesController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
     [HttpGet]
-    public async Task<IActionResult> GetRoutes(Guid userId, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetRoutes(Guid userId)
     {
-        var routesDto = await _serviceManager.RouteService.GetAllByUserIdAsync(userId, cancellationToken);
+        throw new Exception("fwaawfawfawf");
+        var routesDto = await _serviceManager.RouteService
+            .GetAllByUserIdAsync(Guid.Parse(User.FindFirst("userId").Value));
 
         return Ok(routesDto);
     }
-
+    
     [HttpGet("{routeId:guid}")]
     public async Task<IActionResult> GetRouteById(Guid userId, Guid routeId, CancellationToken cancellationToken)
     {
