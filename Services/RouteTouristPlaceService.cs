@@ -34,7 +34,7 @@ public class RouteTouristPlaceService : IRouteTouristPlaceService
         return routeTouristPlacesDto;
     }
 
-    public async Task<RouteTouristPlaceDto> GetByIdAsync(Guid userId, Guid routeId, Guid touristPlaceId, Guid routeTouristPlaceId, CancellationToken cancellationToken)
+    public async Task<RouteTouristPlaceDto> GetByIdAsync(Guid userId, Guid routeId, Guid routeTouristPlaceId, CancellationToken cancellationToken)
     {
         var user = await _repositoryManager.UserRepository.GetByIdAsync(userId, cancellationToken);
         if (user is null)
@@ -50,13 +50,7 @@ public class RouteTouristPlaceService : IRouteTouristPlaceService
         {
             throw new RouteDoesNotBelongToUserException(userId, routeId);
         }
-        
-        var touristPlace = await _repositoryManager.TouristPlaceRepository.GetByIdAsync(touristPlaceId, cancellationToken);
-        if (touristPlace is null)
-        {
-            throw new TouristPlaceNotFoundException(touristPlaceId);
-        }
-        
+
         var routeTouristPlace = await _repositoryManager.RouteTouristPlaceRepository.GetByIdAsync(routeTouristPlaceId, cancellationToken);
         if (routeTouristPlace is null)
         {
@@ -65,11 +59,6 @@ public class RouteTouristPlaceService : IRouteTouristPlaceService
         if (routeTouristPlace.RouteId != routeId)
         {
             throw new RouteTouristPlaceDoesNotBelongToRouteException(routeTouristPlaceId, routeId);
-        }
-
-        if (routeTouristPlace.TouristPlaceId != touristPlaceId)
-        {
-            throw new RouteTouristPlaceDoesNotBelongToTouristPlaceException(routeTouristPlaceId, touristPlaceId);
         }
         
         var routeTouristPlaceDto = routeTouristPlace.Adapt<RouteTouristPlaceDto>();
