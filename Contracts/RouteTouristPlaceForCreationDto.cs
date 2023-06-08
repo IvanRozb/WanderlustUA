@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Contracts;
 
-public class RouteTouristPlaceForUpdatingDto
+public class RouteTouristPlaceForCreationDto
 {
     [Required(ErrorMessage = "Sequence is required")]
     public int Sequence { get; set; }

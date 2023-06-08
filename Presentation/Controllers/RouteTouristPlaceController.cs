@@ -32,7 +32,7 @@ public class RouteTouristPlaceController : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> CreateRouteTouristPlace(Guid userId, Guid routeId, Guid touristPlaceId, 
-        [FromBody] RouteTouristPlaceForCreatingDto routeForCreationDto, CancellationToken cancellationToken = default)
+        [FromBody] RouteTouristPlaceForCreationDto routeForCreationDto, CancellationToken cancellationToken = default)
     {
         var response = await _serviceManager.RouteTouristPlaceService
             .CreateAsync(userId, routeId, touristPlaceId, routeForCreationDto, cancellationToken);

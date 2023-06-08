@@ -65,7 +65,7 @@ public class RouteTouristPlaceService : IRouteTouristPlaceService
         return routeTouristPlaceDto;
     }
 
-    public async Task<RouteTouristPlaceDto> CreateAsync(Guid userId, Guid routeId, Guid touristPlaceId, RouteTouristPlaceForCreatingDto routeTouristPlaceForCreationDto,
+    public async Task<RouteTouristPlaceDto> CreateAsync(Guid userId, Guid routeId, Guid touristPlaceId, RouteTouristPlaceForCreationDto routeTouristPlaceForCreationDto,
         CancellationToken cancellationToken = default)
     {
         var user = await _repositoryManager.UserRepository.GetByIdAsync(userId, cancellationToken);
