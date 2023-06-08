@@ -23,5 +23,10 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(user => user.LastName).HasMaxLength(50);
         builder.Property(user => user.LastName).IsRequired();
         builder.Property(user => user.CreatedAt).IsRequired();
+        
+        builder.HasMany(user => user.Routes)
+            .WithOne()
+            .HasForeignKey(route => route.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
