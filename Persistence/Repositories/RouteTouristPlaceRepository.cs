@@ -12,8 +12,8 @@ public class RouteTouristPlaceRepository : IRouteTouristPlaceRepository
     public async Task<IEnumerable<RouteTouristPlace>> GetAllByRouteIdAsync(Guid routeId, CancellationToken cancellationToken = default) =>
         await _dbContext.RouteTouristPlaces.Where(x => x.RouteId == routeId).ToListAsync(cancellationToken);
 
-    public async Task<Route> GetByIdAsync(Guid routeTouristPlaceId, CancellationToken cancellationToken = default)
-        => await _dbContext.Routes.FirstOrDefaultAsync(x => x.Id == routeTouristPlaceId, cancellationToken);
+    public async Task<RouteTouristPlace> GetByIdAsync(Guid routeTouristPlaceId, CancellationToken cancellationToken = default)
+        => await _dbContext.RouteTouristPlaces.FirstOrDefaultAsync(x => x.Id == routeTouristPlaceId, cancellationToken);
     
     public void Insert(RouteTouristPlace routeTouristPlace) => _dbContext.RouteTouristPlaces.Add(routeTouristPlace);
 
