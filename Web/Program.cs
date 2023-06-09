@@ -50,14 +50,14 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("DevCors", policyBuilder =>
     {
-        policyBuilder.WithOrigins("http://localhost:3000/")
+        policyBuilder.WithOrigins("http://localhost:3000")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials();
     });
     options.AddPolicy("ProdCors", policyBuilder =>
     {
-        policyBuilder.WithOrigins("https://awfapp/")
+        policyBuilder.WithOrigins("https://awfapp")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials();
