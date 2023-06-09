@@ -27,26 +27,14 @@ internal sealed class AuthService : IAuthService
     }
 
     public async Task<Dictionary<string, string>> Login(UserForLoginDto userForLogin, string passwordKey,
-        string tokenKey)
+        string tokenKey, string adminKey)
     {
         var userId = await _repositoryManager.AuthRepository.Login(userForLogin, passwordKey);
         
         await _repositoryManager.UnitOfWork.SaveChangesAsync();
 
         return new Dictionary<string, string> {
-            {"token", AuthHelper.CreateToken(userId, tokenKey)}
+            {"token", AuthHelper.CreateToken(userId, tokenKey, adminKey)}
         };
-    }
-
-    public Guid RefreshToken(ClaimsPrincipal user)
-    {
-        var userId = user.FindFirst("UserId")?.Value;
-        
-        if (userId == null)
-        {
-            throw new AuthException();
-        }
-
-        return new Guid(userId);
     }
 }
