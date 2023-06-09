@@ -35,6 +35,7 @@ namespace Web.Middleware
                 NotFoundException => StatusCodes.Status404NotFound,
                 IncorrectInputException => StatusCodes.Status401Unauthorized,
                 AuthException => StatusCodes.Status401Unauthorized,
+                ForbiddenAccess => StatusCodes.Status403Forbidden,
                 _ => StatusCodes.Status500InternalServerError
             };
 
