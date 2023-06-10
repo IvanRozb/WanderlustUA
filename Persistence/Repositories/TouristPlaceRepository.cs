@@ -17,10 +17,10 @@ namespace Persistence.Repositories
         {
             var query = _dbContext.TouristPlaces.AsQueryable();
 
-            var touristPlaces = query.Where(tp => tp != null && tp.Name.Contains(searchParam)
-                                                             && tp.Category.Contains(searchParam)
-                                                             && tp.Region.Contains(searchParam)
-                                                             && tp.Description.Contains(searchParam));
+            var touristPlaces = query.Where(tp => tp != null && (tp.Name.Contains(searchParam)
+                                                                 || tp.Category.Contains(searchParam)
+                                                                 || tp.Region.Contains(searchParam)
+                                                                 || tp.Description.Contains(searchParam)));
             
             return await touristPlaces.ToListAsync(cancellationToken: cancellationToken);
         }
