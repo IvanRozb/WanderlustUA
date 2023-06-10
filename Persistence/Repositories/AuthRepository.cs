@@ -63,7 +63,7 @@ internal sealed class AuthRepository : IAuthRepository
 
         if (passwordHash.Where((t, index) => t != userForConfirmation.PasswordHash[index]).Any())
         {
-            throw new IncorrectPasswordException(userForLogin.Password);
+            throw new IncorrectPasswordException();
         }
 
         var loggedUser = await _dbContext.Users.FirstOrDefaultAsync(user => user != null && user.Email == userForLogin.Email);

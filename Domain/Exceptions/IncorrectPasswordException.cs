@@ -2,8 +2,8 @@ namespace Domain.Exceptions;
 
 public sealed class IncorrectPasswordException : IncorrectInputException
 {
-    public IncorrectPasswordException(string password)
-        : base($"Password \'{password}\' is invalid!")
+    public IncorrectPasswordException()
+        : base("Password is invalid!")
     {
     }
 }
