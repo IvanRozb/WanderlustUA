@@ -53,14 +53,16 @@ builder.Services.AddCors(options =>
         policyBuilder.WithOrigins("http://localhost:3000")
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials();
-    });
+            .AllowCredentials()
+            .WithExposedHeaders("X-Total-Count"); // Expose X-Total-Count header
+});
     options.AddPolicy("ProdCors", policyBuilder =>
     {
         policyBuilder.WithOrigins("https://awfapp")
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials();
+            .AllowCredentials()
+            .WithExposedHeaders("X-Total-Count"); // Expose X-Total-Count header
     });
 });
 
@@ -81,7 +83,6 @@ else
 app.UseAuthentication();
 
 app.UseAuthorization();
-
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();

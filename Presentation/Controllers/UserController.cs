@@ -23,16 +23,22 @@ public class UsersController : ControllerBase
         if (userRole != "Admin")
             throw new InsufficientPrivilegeException("admin");
         var users = await _serviceManager.UserService.GetAllAsync(cancellationToken);
-
+        // Set the X-Total-Count header in the response
+        HttpContext.Response.Headers.Add("X-Total-Count", users.Count().ToString());
         return Ok(users);
     }
 
     [HttpGet("{userId:guid}")]
     public async Task<IActionResult> GetUserById(Guid userId, CancellationToken cancellationToken)
     {
-        var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
-        if (userRole != "Admin")
-            throw new InsufficientPrivilegeException("admin");
+        var userIdData = new Guid(User.FindFirst("userId")?.Value);
+        if (userIdData != userId)
+        {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (userRole != "Admin")
+                throw new InsufficientPrivilegeException("admin");
+        }
+
         var userDto = await _serviceManager.UserService.GetByIdAsync(userId, cancellationToken);
 
         return Ok(userDto);
@@ -52,9 +58,13 @@ public class UsersController : ControllerBase
     [HttpPut("{userId:guid}")]
     public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] UserForUpdateDto userForUpdateDto, CancellationToken cancellationToken)
     {
-        var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
-        if (userRole != "Admin")
-            throw new InsufficientPrivilegeException("admin");
+        var userIdData = new Guid(User.FindFirst("userId")?.Value);
+        if (userIdData != userId)
+        {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (userRole != "Admin")
+                throw new InsufficientPrivilegeException("admin");
+        }
         await _serviceManager.UserService.UpdateAsync(userId, userForUpdateDto, cancellationToken);
 
         return NoContent();

@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿
+using System.Text.Json;
 using Domain.Exceptions;
 
 namespace Web.Middleware

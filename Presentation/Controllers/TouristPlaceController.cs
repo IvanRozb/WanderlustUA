@@ -21,7 +21,7 @@ public class TouristPlaceController : ControllerBase
     public async Task<IActionResult> GetTouristPlaces(CancellationToken cancellationToken)
     {
         var touristPlaces = await _serviceManager.TouristPlaceService.GetAllAsync(cancellationToken);
-
+        HttpContext.Response.Headers.Add("X-Total-Count", touristPlaces.Count().ToString());
         return Ok(touristPlaces);
     }
     
