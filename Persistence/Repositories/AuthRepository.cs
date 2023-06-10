@@ -17,7 +17,7 @@ internal sealed class AuthRepository : IAuthRepository
     {
         if (_dbContext.Users
             .Any(user => user != null && user.Email == userForRegistration.Email))
-            throw new Exception("User with this email does already exist.");
+            throw new Exception("The user with this email already exists.");
         
         var passwordSalt = new byte[128 / 8];
         using var rng = RandomNumberGenerator.Create();
