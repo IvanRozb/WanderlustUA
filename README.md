@@ -1,7 +1,6 @@
 # Wanderlust
 
-Wanderlust is a web-based platform that allows users to search for and plan tourist trips. 
-It provides a user-friendly interface for discovering exciting destinations and organizing travel itineraries. 
+Wanderlust is a web-based platform that allows users to search for and plan tourist places and trips.
 The system also includes authentication and authorization features, 
 allowing users to securely access the platform with JWT access tokens and different roles such as Admin and User.
 
